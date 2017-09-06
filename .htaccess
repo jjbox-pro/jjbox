@@ -1,0 +1,11 @@
+# Установка кодировки
+AddDefaultCharset UTF-8
+
+# Запрет доступа к каталогам
+Options -Indexes
+
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{QUERY_STRING} .+
+RewriteRule .* /? [L,R=301]

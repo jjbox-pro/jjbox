@@ -1,0 +1,281 @@
+<!-- Шаблон главного интерфейса (страницы) -->
+<script type="text/plain" id="iMainPage">
+	<div>
+		<div class="mainPage-header-wrp"></div>
+		<div class="mainPage-mmenu-wrp"></div>
+		<div class="mainPage-content-block">
+			<div class="mainPage-intro-wrp"></div>
+			<div class="mainPage-content-wrp"></div>
+			<div class="mainPage-rmenu-wrp"></div>
+		</div>
+		<div class="mainPage-footer-wrp"></div>
+		<div class="mainPage-back-toTop-wrp"></div>
+	</div>
+</script>
+
+<script type="text/plain" id="iMainPage.backToTop">
+	<div class="mainPage-back-toTop">
+		<img src="/cont/img/arrow_up.png" alt="К началу страницы">
+	</div>
+</script>	
+
+<!-- Шаблон шапки -->
+<script type="text/plain" id="iMainPage.header">
+    <div class="header-logo-block">
+		<a href="/" class="header-logo tst-fakeLink"></a>
+        <a href="/" class="header-logoText tst-fakeLink">{{=info.contacts.site.text}}</a>
+		<br>
+		<span class="header-logoDesc">Все виды работ качествено и в срок!</span>
+    </div>
+	<div class="header-contacts-block">
+        <span class="header-contacts-text">Контакты:</span>
+		<br>
+		<div class="header-contacts-info">
+			<table class="header-contacts-infoTbl" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td>Телефон:</td>
+						<td>
+							{{@utils.objToArr(info.contacts.phones.list, function(a, b){return a.order - b.order;}): phone}}
+								<div>{{=snip.linkPhone(phone.text)}}</div>
+							{{@}}
+						</td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td>
+							{{@utils.objToArr(info.contacts.mails.list, function(a, b){return a.order - b.order;}): mail}}
+								<div>{{=snip.linkMail(mail.text, mail.href)}}</div>
+							{{@}}
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="header-contacts-other">
+								<span class="header-contacts-otherLink">Еще контакты</span>
+								<div class="popUp">
+									<div class="popUp-arrowOut"></div>
+									<div class="popUp-arrowIn"></div> 
+									<div class="contacts-content"> 
+										<div>
+											<div class="popUp-content-block">
+												<div class="popUp-content-title">Отвечаем в мессенджерах:</div>
+												{{@utils.objToArr(info.contacts.messengers.list, function(a, b){return a.order - b.order;}): messenger}}
+													<div class="icon_wrapper">
+														{{=snip.link(snip.messenger({type:messenger.id, text:messenger.text}), messenger.href+utils.cleanPhoneNumber(info.contacts.messengers.phone, true))}}
+													</div>
+												{{@}}
+												<div class="tst-cB"></div>
+												<div class="popUp-content-text">Чтобы написать, добавьте наш номер <br>{{=snip.linkPhone(info.contacts.messengers.phone)}} в свою адресную книгу</div>
+											</div>
+										</div>
+									</div>
+									<div class="popUp-content-block">
+										<div class="popUp-content-title">Отвечаем в соц сетях:</div>
+										{{@utils.objToArr(info.contacts.social.list, function(a, b){return a.order - b.order;}): social}}
+											<div class="icon_wrapper">
+												{{=snip.social({type:social.id, text:social.text, url: social.href})}}
+											</div>
+										{{@}}
+										<div class="tst-cB"></div>
+									</div>	
+									<div class="popUp-content-text">Время работы колл-центра:<br>Понедельник-Суббота, 09:00-20:00 <br>Воскресенье, 10:00-19:00</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </div>
+</script>
+
+<!-- Шаблон меню -->
+<script type="text/plain" id="iMainPage.mmenu">
+	<div>
+		{{=tmplMgr.iMainPage.mmenu.list({menu: info.menu})}}
+	</div>
+</script>
+
+<script type="text/plain" id="iMainPage.mmenu.list">
+	<ul class="mmenu-list">
+		{{@utils.objToArr(it.menu, function(a, b){return a.order - b.order;}): item}}
+			<li class="mmenu-item">
+				<a class="mmenu-link js-tabLink" href="#{{=item.id}}" data-tab="{{=item.id}}">{{=item.title}}</a>
+				{{?item.child}}
+					{{=tmplMgr.iMainPage.mmenu.list({menu: item.child})}}
+				{{?}}
+			</li>
+		{{@}}
+	</ul>
+</script>
+	
+<script type="text/plain" id="iMainPage.intro">
+	<div>
+		{{=tmplMgr.plug.gallery({cls:'intro', list:info.intro.gallery.list, height:330})}}
+    </div>
+</script>
+
+<script type="text/plain" id="iMainPage.content">
+    <div>
+		<div class="tabs-cont"></div>
+	</div>
+</script>
+
+<script type="text/plain" id="iMainPage.content.general">
+    <div>
+        <h1>Мастер на дом в Красноярске</h1>
+		<p>Мы выполняем все виды работ по ремонту квартир, домов или офисов в Красноярске и пригороде без посредников!</p>
+		<ul>
+			<li><strong>Выезд и консультация БЕСПЛАТНО<br />
+			</strong>Наши специалисты проведут замеры и ответят на все ваши вопросы совершенно бесплатно.</li>
+			<li><strong>У нас работают профессионалы своего дела</strong><br />
+			В нашем штате есть как мастера универсалы, так и мастера специализирующиеся на одном направлении.</li>
+			<li><strong>Демократичные цены<br />
+			</strong>Услуги &#171;муж на час&#187; нашей компании выгодны не высокой ценой, по сравнению с аналогичными специализированными службами и более раскрученными крупными фирмами. Учитывая непростую экономическую обстановку, а также персональные интересы клиентов, мы предлагаем цены на ремонтные и пусконаладочные работы, адаптированные к среднему заработку горожан, то есть вполне бюджетные.</li>
+			<li><strong>Мобильность<br />
+			</strong>Наши мастера быстро, профессионально и недорого выполнят любые услуги типа &#8212; муж на час в Красноярске и пригороде.</li>
+			<li><strong>Гарантия качества<br />
+			</strong>Мы несем полную ответственность за проведенную работу с гарантией качественного исполнения работ.</li>
+		</ul>
+		<p><em>Мастер на дом &#8212; Мы разрешим все Ваши бытовые проблемы!</em></p>
+    </div>
+</script>
+
+<script type="text/plain" id="iMainPage.content.services">
+    <div>
+        Услуги!!!
+    </div>
+</script>
+	
+	<script type="text/plain" id="iMainPage.content.services_electrics">
+		<div>
+			Электрика!!!
+		</div>
+	</script>
+
+	<script type="text/plain" id="iMainPage.content.services_sanitary">
+		<div>
+			Сантехника!!!
+		</div>
+	</script>
+	
+	<script type="text/plain" id="iMainPage.content.services_siding">
+		<div>
+			<h1>Сайдинг</h1>
+			<p>Бла бла описание</p>
+			
+			<div>
+				{{@it.galleryList: gallery}}
+					{{=tmplMgr.plug.gallery({cls:gallery.id, list:gallery.list, group:gallery.group, height:gallery.height||330})}}
+				{{@}}
+			</div>
+			
+			{{@it.priceList: price}}
+				{{=tmplMgr.table.price({price:price, showTitle:true})}}
+			{{@}}
+		</div>
+	</script>
+	
+	
+<script type="text/plain" id="iMainPage.content.price">
+    <div>
+        <h1>Цены на услуги муж на час в Красноярске</h1>
+		<p>
+			Все цены на услуги муж на час актуальны в Красноярске и пригороде. Если вы не видите стоимость, интересующей вас услуги ПОЗВОНИТЕ НАМ по телефону 280-18-55. Мы работаем каждый день с 8.00 до 22.00.
+		</p>
+		
+		{{@it.priceList: price}}
+			{{=tmplMgr.table.price({price:price, showTitle:true})}}
+		{{@}}
+	</div>
+</script>
+
+<script type="text/plain" id="iMainPage.content.contacts">
+    <div>
+		Контакты!!!
+    </div>
+</script>
+
+<script type="text/plain" id="iMainPage.content.contacts_about">
+    <div>
+        О нас!!!!
+    </div>
+</script>
+	
+<script type="text/plain" id="iMainPage.rmenu">
+    <div>
+        {{@info.menu.services.child: item}}
+			<ul class="rmenu-list">
+				<li class="rmenu-item">
+					<a class="rmenu-link js-tabLink" href="#{{=item.id}}" data-tab="{{=item.id}}">{{=item.title}}</a>
+				</li>
+			</ul>
+		{{@}}
+    </div>
+</script>
+
+<script type="text/plain" id="iMainPage.footer">
+    <div class="footer-info">
+		<div>
+			Заявки принимаем по телефонам: 
+			<span class="footer-phone">
+				{{@utils.objToArr(info.contacts.phones.list, function(a, b){return a.order - b.order;}): phone}}
+					{{=snip.linkPhone(phone.text)}}; 
+				{{@}}
+			</span>
+		</div>
+		<div>Время работы с <span class="footer-phone">8.00</span> до <span class="footer-phone">22.00</span></div>
+    </div>
+	<div class="footer-copyright">
+        © {{=info.contacts.site.text.toLowerCase()}} 2017. Все права защищены.
+    </div>
+</script>
+
+<script type="text/plain" id="tabs.tab"></script>
+
+<script type="text/plain" id="table.price">
+	{{?it.showTitle}}
+		<h2>{{=it.price.title}}</h2>
+	{{?}}
+	
+	<table {{?it.price.id}}id="{{=it.price.id}}"{{?}} class="tbl tbl-price" cellpadding="0" cellspacing="0">
+		<thead class="tbl-thead">
+			<tr class="tbl-tr">
+				<td class="tbl-td">{{=snip.btnTable('name','Наименование работ','')}}</td>
+				<td class="tbl-td">{{=snip.btnTable('count','Кол-во','')}}</td>
+				<td class="tbl-td">{{=snip.btnTable('cost','Стоимость','')}}</td>
+			</tt>
+		</thead>
+		<tbody class="tbl-tbody"></tbody>
+	</table>
+</script>
+		
+<script type="text/plain" id="table.price.list">
+	{{@it.list: price}}
+		<tr class="tbl-tr">
+			<td class="tbl-td">{{=price.name}}</td>
+			<td class="tbl-td">{{=price.countPreFix}}{{=price.count}}{{=price.countPostFix}}</td>
+			<td class="tbl-td">{{=price.costPreFix}}{{=price.cost}}{{=price.costPostFix}}</td>
+		</tr>
+	{{@}}
+</script>
+	
+<script type="text/plain" id="plug.gallery">
+	<div class="imgGallery {{=it.cls}}-gallery {{=it.cls}}-group-{{=it.group||'0'}}" style="height: {{=it.height}}px;">
+		{{@it.list: img: key}}
+			<a href="{{=img.scr}}"><img src="{{=img.srcSmall||img.scr}}" style="height: {{=it.height}}px;" alt="{{=img.desc||''}}" id="{{=key}}"></a>
+		{{@}}
+	</div>
+</script>
+		
+<script type="text/plain" id="preloader">
+	<div class="preloader-wrp">
+		<div class="cssload-tetrominos">
+			<div class="cssload-tetromino cssload-box1"></div>
+			<div class="cssload-tetromino cssload-box2"></div>
+			<div class="cssload-tetromino cssload-box3"></div>
+			<div class="cssload-tetromino cssload-box4"></div>
+		</div>
+	</div>
+</script>
