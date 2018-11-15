@@ -1,11 +1,19 @@
 # Установка кодировки
 AddDefaultCharset UTF-8
 
-# Запрет доступа к каталогам
-Options -Indexes
+# Подключаем node js
+#PassengerAppRoot /home/host1611544/jjbox.ru/nodejs_app/www
+#PassengerAppType node
+#PassengerStartupFile app.js
+#PassengerNodejs /home/host1611544/node/bin/node
+#PassengerRestartDir /home/host1611544/jjbox.ru/nodejs_tmp/www
+#PassengerFriendlyErrorPages on
 
-RewriteEngine on
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{QUERY_STRING} .+
-RewriteRule .* /? [L,R=301]
+# Запрет доступа к каталогам
+#Options -Indexes
+
+#RewriteEngine on
+#RewriteBase /
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{QUERY_STRING} .+
+#RewriteRule .* /? [L,R=301]
