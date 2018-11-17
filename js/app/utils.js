@@ -55,7 +55,7 @@ JJ_Utils.prototype.loadScript = function(url, opt){
 
 JJ_Utils.prototype.loadStylesheet = function(href, opt){
 	opt = opt||{};
-
+	
 	var stylesheet = document.createElement('link');
 	stylesheet.href = href;
 

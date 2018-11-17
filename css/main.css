@@ -10,5 +10,5 @@ body{
 	font-size: 12px;
 }
 
-.jj-body-cont-wrp{}
-	.jj-body-cont{position: relative; z-index: 100;}
+.jj-cont-wrp{}
+	.jj-cont{position: relative; z-index: 100;}
