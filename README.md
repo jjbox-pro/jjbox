@@ -1,2 +1,3 @@
 # jjbox
-jjbox repository
+
+Library for frontend web development.
